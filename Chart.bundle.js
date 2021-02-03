@@ -1625,12 +1625,12 @@ for (var name in colorName$1) {
 
 
 
-var Color = function (obj) {
-	if (obj instanceof Color) {
+var ColorJS = function (obj) {
+	if (obj instanceof ColorJS) {
 		return obj;
 	}
-	if (!(this instanceof Color)) {
-		return new Color(obj);
+	if (!(this instanceof ColorJS)) {
+		return new ColorJS(obj);
 	}
 
 	this.valid = false;
@@ -1643,7 +1643,7 @@ var Color = function (obj) {
 		alpha: 1
 	};
 
-	// parse Color() argument
+	// parse ColorJS() argument
 	var vals;
 	if (typeof obj === 'string') {
 		vals = colorString.getRgba(obj);
@@ -1670,7 +1670,7 @@ var Color = function (obj) {
 	}
 };
 
-Color.prototype = {
+ColorJS.prototype = {
 	isValid: function () {
 		return this.valid;
 	},
@@ -1955,7 +1955,7 @@ Color.prototype = {
 		// making the final build way to big to embed in ChartJS.js. So let's do it manually,
 		// assuming that values to clone are 1 dimension arrays containing only numbers,
 		// except 'alpha' which is a number.
-		var result = new Color();
+		var result = new ColorJS();
 		var source = this.values;
 		var target = result.values;
 		var value, type;
@@ -1978,7 +1978,7 @@ Color.prototype = {
 	}
 };
 
-Color.prototype.spaces = {
+ColorJS.prototype.spaces = {
 	rgb: ['red', 'green', 'blue'],
 	hsl: ['hue', 'saturation', 'lightness'],
 	hsv: ['hue', 'saturation', 'value'],
@@ -1986,7 +1986,7 @@ Color.prototype.spaces = {
 	cmyk: ['cyan', 'magenta', 'yellow', 'black']
 };
 
-Color.prototype.maxes = {
+ColorJS.prototype.maxes = {
 	rgb: [255, 255, 255],
 	hsl: [360, 100, 100],
 	hsv: [360, 100, 100],
@@ -1994,7 +1994,7 @@ Color.prototype.maxes = {
 	cmyk: [100, 100, 100, 100]
 };
 
-Color.prototype.getValues = function (space) {
+ColorJS.prototype.getValues = function (space) {
 	var values = this.values;
 	var vals = {};
 
@@ -2010,7 +2010,7 @@ Color.prototype.getValues = function (space) {
 	return vals;
 };
 
-Color.prototype.setValues = function (space, vals) {
+ColorJS.prototype.setValues = function (space, vals) {
 	var values = this.values;
 	var spaces = this.spaces;
 	var maxes = this.maxes;
@@ -2067,7 +2067,7 @@ Color.prototype.setValues = function (space, vals) {
 	return true;
 };
 
-Color.prototype.setSpace = function (space, args) {
+ColorJS.prototype.setSpace = function (space, args) {
 	var vals = args[0];
 
 	if (vals === undefined) {
@@ -2084,7 +2084,7 @@ Color.prototype.setSpace = function (space, args) {
 	return this;
 };
 
-Color.prototype.setChannel = function (space, index, val) {
+ColorJS.prototype.setChannel = function (space, index, val) {
 	var svalues = this.values[space];
 	if (val === undefined) {
 		// color.red()
@@ -2102,10 +2102,10 @@ Color.prototype.setChannel = function (space, index, val) {
 };
 
 if (typeof window !== 'undefined') {
-	window.Color = Color;
+	window.ColorJS = ColorJS;
 }
 
-var chartjsColor = Color;
+var chartjsColor = ColorJS;
 
 function isValidKey(key) {
 	return ['__proto__', 'prototype', 'constructor'].indexOf(key) === -1;
@@ -10894,7 +10894,7 @@ var core_helpers = function() {
 
 	helpers$1.color = !chartjsColor ?
 		function(value) {
-			console.error('Color.js not found!');
+			console.error('ColorJS.js not found!');
 			return value;
 		} :
 		function(value) {
